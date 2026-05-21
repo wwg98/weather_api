@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weather</title>
+  </head>
+  <body>
+    <h1>다낭시</h1>
+    <h2><span id="weather"></span></h2>
+    <h3>날씨 설명 : <span id="description"></span></h3>
+    <h3>습도 : <span id="hum"></span></h3>
+    <h3>풍속 : <span id="windSpeed"></span></h3>
+
+    <script>
+      const weather = document.querySelector("#weather");
+      const description = document.querySelector("#description");
+      const hum = document.querySelector("#hum");
+      const windspeed = document.querySelector("#windSpeed");
+
+      fetch(
+        "https://api.openweathermap.org/data/2.5/weather?id=1583992&appid=1192cdef9ce6df3a62869db8ceb87648&units=metric",
+      )
+        .then(res => res.json())
+        .then(result => {
+          console.log(result);
+
+          weather.innerText = result.weather[0].main;
+          description.innerText = result.weather[0].description;
+          hum.innerText = result.main.humidity;
+          windspeed.innerText = result.wind.speed;
+        });
+    </script>
+  </body>
+</html>
