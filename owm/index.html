@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>open weather map</title>
+  </head>
+  <body>
+    <h1>서울 날씨</h1>
+    <p>현재 온도 : <span id="ctemp"></span></p>
+    <p>현재 습도 : <span id="chum"></span></p>
+    <img id="icon" src="" alt="" />
+
+    <script>
+      const ctemp = document.querySelector("#ctemp");
+      const chum = document.querySelector("#chum");
+      const icon = document.querySelector("#icon");
+
+      fetch(
+        "https://api.openweathermap.org/data/2.5/weather?id=1835848&appid=1192cdef9ce6df3a62869db8ceb87648&units=metric",
+      )
+        .then(res => res.json())
+        .then(result => {
+          console.log(result);
+          console.log(result.main.temp);
+          console.log(result.weather[0].icon);
+          let imgURL = `https://openweathermap.org/payload/api/media/file/${result.weather[0].icon}.png`;
+
+          ctemp.innerText = result.main.temp;
+          chum.innerText = result.main.humidity;
+          icon.setAttribute("src", imgURL);
+        });
+    </script>
+  </body>
+</html>
