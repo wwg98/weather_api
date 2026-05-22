@@ -19,7 +19,11 @@
       fetch(
         "https://api.openweathermap.org/data/2.5/weather?id=1835848&appid=1192cdef9ce6df3a62869db8ceb87648&units=metric",
       )
-        .then(res => res.json())
+        // .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          return res.json();
+        })
         .then(result => {
           console.log(result);
           console.log(result.main.temp);
